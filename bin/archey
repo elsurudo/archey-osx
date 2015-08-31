@@ -45,6 +45,8 @@ done
 user=$(whoami)
 hostname=$(hostname | sed 's/.local//g')
 ip=$(dig +short myip.opendns.com @resolver1.opendns.com)
+localIpWifi=$(ipconfig getifaddr en0)
+localIpEn=$(ipconfig getifaddr en1)
 distro="OS X $(sw_vers -productVersion)"
 kernel=$(uname)
 uptime=$(uptime | sed 's/.*up \([^,]*\), .*/\1/')
@@ -92,6 +94,7 @@ distroText="${textColor}Distro:${normal}"
 kernelText="${textColor}Kernel:${normal}"
 uptimeText="${textColor}Uptime:${normal}"
 ipText="${textColor}IP Address:${normal}"
+localIpText="${textColor}Local IP Address:${normal}"
 shellText="${textColor}Shell:${normal}"
 terminalText="${textColor}Terminal:${normal}"
 packagehandlerText="${textColor}Packages:${normal}"
@@ -103,18 +106,18 @@ diskText="${textColor}Disk:${normal}"
 # as when run.
 echo -e "
 
-${GREEN#  }                 ###
-${GREEN#  }               ####                   $userText $user
-${GREEN#  }               ###                    $hostnameText $hostname
-${GREEN#  }       #######    #######             $distroText $distro
-${YELLOW# }     ######################           $kernelText $kernel
-${YELLOW# }    #####################             $uptimeText $uptime
-${RED#    }    ####################              $shellText $shell
+${GREEN#  }                 ###                  $userText $user
+${GREEN#  }               ####                   $hostnameText $hostname
+${GREEN#  }               ###                    $distroText $distro
+${GREEN#  }       #######    #######             $kernelText $kernel
+${YELLOW# }     ######################           $uptimeText $uptime
+${YELLOW# }    #####################             $shellText $shell
 ${RED#    }    ####################              $terminalText $terminal
-${RED#    }    #####################             $packagehandlerText $packagehandler
-${PURPLE# }     ######################           $cpuText $cpu
-${PURPLE# }      ####################            $memoryText $ram
-${BLUE#   }        ################              $diskText $disk
-${BLUE#   }         ####     #####               $ipText $ip${normal}
+${RED#    }    ####################              $packagehandlerText $packagehandler
+${RED#    }    #####################             $cpuText $cpu
+${PURPLE# }     ######################           $memoryText $ram
+${PURPLE# }      ####################            $diskText $disk
+${BLUE#   }        ################              $ipText $ip${normal}
+${BLUE#   }         ####     #####               $localIpText $localIpWifi${normal}
 
 "
